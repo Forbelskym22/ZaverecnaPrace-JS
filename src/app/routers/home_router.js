@@ -7,7 +7,7 @@ export default function() {
     const router = Router();
     const controller = new HomeController();
     
-    router.get('*', controller.home);
+    router.get('/', controller.home);
 
     return router;
 }
