@@ -1,12 +1,14 @@
 {
   "name": "src",
   "version": "1.0.0",
+  "type": "module",
   "description": "Funny Quotes",
   "main": "./src/server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
-  "author": "Martin Forbelský, Jakub Ježek",
+  "author": "Martin Forbelský",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
