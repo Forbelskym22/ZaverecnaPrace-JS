@@ -8,6 +8,6 @@ export default function() {
     const controller = new HomeController();
     
     router.get('/', controller.home);
-
+    
     return router;
 }
