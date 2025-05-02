@@ -1,13 +1,18 @@
 import { Router } from "express";
 import UserController from "../controllers/user_controller.js";
-
+import { UserRepository } from "../models/repository/user_repository.js";
+import { UserService } from "../models/service/user_service.js";
 
 
 export default function() {
+
+    const userRepository = new UserRepository();
+    const userService = new UserService(userRepository);
+
     const router = Router();
-    const controller = new UserController();
+    const controller = new UserController(userService);
     
-    router.get('/api/register', controller.register);
+    router.post('/register', controller.register);
     
     return router;
 }
