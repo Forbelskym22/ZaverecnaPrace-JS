@@ -11,7 +11,7 @@ export default class UserController {
             const { username, password, confirmPassword } = req.body; 
             console.log(username, password, confirmPassword);
             await this.service.createUser(username, password, confirmPassword);
-    res.redirect('/user/login');
+        res.redirect('/user/login');
         }
         catch(error){
             res.render('user/register',  { errorMessage: error });
@@ -22,8 +22,18 @@ export default class UserController {
         res.render("user/register")
     }
 
-    login = (req,res) => {
-
+    login = async (req,res) => {
+        try{
+            const { username, password} = req.body; 
+            login = await this.service.login(username,password);
+            if(login){
+                req.session.username = username
+            }
+            res.redirect('/user/profile');
+        }
+        catch(error){
+            res.render('user/register',  { errorMessage: error });
+        }  
     }
 
     getLogin = (req, res) => {
