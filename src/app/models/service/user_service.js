@@ -28,6 +28,22 @@ export class UserService {
             return  this.repo.createUser(username,hashedpassword)
         }
     
+        async login(username, password) {
+            const user = await this.repo.findUserByUsername(username); 
+          
+            if (!user) {
+              throw new Error('Uživatel neexistuje.');
+            }
+          
+            const match = bcrypt.compareSync(password, user.password);
+          
+            if (!match) {
+              throw new Error('Neplatné heslo.');
+            }
+          
+            return user; 
+          }
+          
 
 }
 
