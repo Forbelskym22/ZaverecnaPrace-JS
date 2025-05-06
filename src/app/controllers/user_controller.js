@@ -7,7 +7,21 @@ export default class UserController {
     }
 
     register = (req, res) => {
-        this.service.createUser("Franta","heslo");
+        const { username, password, confirmPassword } = req.body; 
+        this.service.create(username, password, confirmPassword);
+        
+    }
+
+    getRegister = (req, res) => {
+        res.render("user/register")
+    }
+
+    login = (req,res) => {
+
+    }
+
+    getLogin = (req, res) => {
+        res.render("user/login")
     }
 }
 

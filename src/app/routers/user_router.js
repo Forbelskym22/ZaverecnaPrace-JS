@@ -13,6 +13,9 @@ export default function() {
     const controller = new UserController(userService);
     
     router.post('/register', controller.register);
-    
+    router.get('/register', controller.getRegister)
+
+    router.post('/login', controller.login);
+    router.get('/login', controller.getLogin)
     return router;
 }

@@ -9,5 +9,6 @@ export default function() {
     
     router.get('/', controller.home);
     
+
     return router;
 }
