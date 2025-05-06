@@ -8,7 +8,6 @@ export class UserRepository {
   }
       
     async createUser(username, password) {
-      console.log("DOŠLO TO AŽ SEM!")
         const { data, error } = await this.db
           .from('users') 
           .insert([
