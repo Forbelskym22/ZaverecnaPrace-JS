@@ -14,6 +14,10 @@ const __dirname = path.dirname(__filename);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// middle ware
+app.use(express.urlencoded({ extended: false }));                     
+
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../www')));
 

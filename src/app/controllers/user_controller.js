@@ -8,7 +8,8 @@ export default class UserController {
 
     register = (req, res) => {
         const { username, password, confirmPassword } = req.body; 
-        this.service.create(username, password, confirmPassword);
+        console.log(username, password, confirmPassword);
+        this.service.createUser(username, password, confirmPassword);
         
     }
 

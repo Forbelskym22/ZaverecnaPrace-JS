@@ -2,7 +2,6 @@
 import { User } from "../entity/user.js";
 import { supabase } from '../supabase.js';
 
-
 export class UserRepository {
   constructor() {
     this.db = supabase; 
@@ -25,6 +24,19 @@ export class UserRepository {
         return new User(user.id, user.username, user.password);
       }
 
+      async findUserByUsername(username) {
+        const { data, error } = await this.db
+          .from('users')
+          .select('*')
+          .eq('username', username)
+          .single(); 
+      
+        if (error) {
+          throw new Error(`Chyba při hledání uživatele: ${error.message}`);
+        }
+      
+        return data;
+      }
 }
 
 
