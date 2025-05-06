@@ -17,7 +17,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../www')));
 
-app.use('/api', userRouter());
+app.use('/user', userRouter());
 app.use('/', homeRouter());
 
 
