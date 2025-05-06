@@ -39,6 +39,10 @@ export default class UserController {
     getLogin = (req, res) => {
         res.render("user/login")
     }
+
+    getProfile = (req, res) => {
+        res.render("user/profile")
+    }
 }
 
 

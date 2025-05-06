@@ -17,5 +17,9 @@ export default function() {
 
     router.post('/login', controller.login);
     router.get('/login', controller.getLogin)
+
+    //router.post('/profile', controller.profile);
+    router.get('/profile', controller.getProfile)
+
     return router;
 }
