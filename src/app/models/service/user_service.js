@@ -18,8 +18,10 @@ export class UserService {
 
         }
 
-        if(!this.repo.findUserByUsername(username)){
-            throw new Error('User with this name already exists.');
+        const existingUser = await this.repo.findUserByUsername(username);
+
+        if (existingUser) {
+        throw new Error('Uživatel s tímto jménem již existuje.');
         }
 
             let hashedpassword = bcrypt.hashSync(password, 10);

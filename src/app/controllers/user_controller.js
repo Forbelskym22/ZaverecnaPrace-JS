@@ -6,11 +6,16 @@ export default class UserController {
         this.service = UserService;
     }
 
-    register = (req, res) => {
-        const { username, password, confirmPassword } = req.body; 
-        console.log(username, password, confirmPassword);
-        this.service.createUser(username, password, confirmPassword);
-        
+    register = async (req, res) => {
+        try{
+            const { username, password, confirmPassword } = req.body; 
+            console.log(username, password, confirmPassword);
+            await this.service.createUser(username, password, confirmPassword);
+    res.redirect('/user/login');
+        }
+        catch(error){
+            res.render('user/register',  { errorMessage: error });
+        }       
     }
 
     getRegister = (req, res) => {

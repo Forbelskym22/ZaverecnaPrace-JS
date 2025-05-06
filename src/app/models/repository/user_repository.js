@@ -32,7 +32,7 @@ export class UserRepository {
           .single(); 
       
         if (error) {
-          throw new Error(`Chyba při hledání uživatele: ${error.message}`);
+          throw new Error(`Uživatel se nenašel`);
         }
       
         return data;
