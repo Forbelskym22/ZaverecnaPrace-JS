@@ -31,7 +31,7 @@ export class UserRepository {
           .single(); 
       
         if (error) {
-          throw new Error(`Uživatel se nenašel`);
+          return false
         }
       
         return data;
