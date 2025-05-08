@@ -22,9 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../www')));
 
-app.use('/user', userRouter());
-app.use('/', homeRouter());
-
 app.use(session({
     secret: process.env.SECRET,
     resave: true,
@@ -36,5 +33,11 @@ app.use((req, res, next) => {
     res.locals.username = req.session.username || null;
     next();
 });
+
+
+app.use('/user', userRouter());
+app.use('/', homeRouter());
+
+
 
 export default app;
