@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import homeRouter from './routers/home_router.js';
 import userRouter from './routers/user_router.js';
 import dotenv from 'dotenv';
+import session from 'express-session';
 dotenv.config();
 
 const app = express();
@@ -24,6 +25,16 @@ app.use(express.static(path.join(__dirname, '../www')));
 app.use('/user', userRouter());
 app.use('/', homeRouter());
 
+app.use(session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false },
+}))
 
+app.use((req, res, next) => {
+    res.locals.username = req.session.username || null;
+    next();
+});
 
 export default app;
