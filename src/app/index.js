@@ -6,6 +6,7 @@ import homeRouter from './routers/home_router.js';
 import userRouter from './routers/user_router.js';
 import dotenv from 'dotenv';
 import session from 'express-session';
+import noteRouter from './routers/note_router.js';
 dotenv.config();
 
 const app = express();
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 
 
 app.use('/user', userRouter());
+app.use('/notes', noteRouter());
 app.use('/', homeRouter());
 
 

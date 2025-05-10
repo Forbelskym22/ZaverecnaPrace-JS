@@ -29,7 +29,7 @@ export default class UserController {
             if(login){
                 req.session.username = username
             }
-            res.render('/user/profile', { notes: null || [] });
+            res.render('user/profile', { notes: null || [] });
         }
         catch(error){
             res.render('user/register',  { errorMessage: error });

@@ -10,7 +10,7 @@ export class NoteService {
     } 
 
     async createNote(userid,name,text,important){
-        return is.repo.createNote(userid, name, text, important)
+        return await this.repo.createNote(userid, name, text, important)
     }
           
 

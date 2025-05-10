@@ -8,22 +8,28 @@ export class NoteRepository {
   }
 
   async createNote(userid, name, text, important = false) {
+    const negr = { userid, name, text, important };
+    console.log("Pokus o insert:", negr);
     const { data, error } = await this.db
       .from('notes')
       .insert([
         {
-          userid,
-          name,
-          text,
-          important
+          userid: 11,
+          name: "s",
+          text: "s",
+          important: false
         }
       ])
       .select(); 
 
     if (error) {
-      throw new Error('Nepodařilo se vytvořit poznámku: ' + error.message);
+        
+        console.error("Supabase insert error:", error);  // log full error object
+        throw new Error('Nepodařilo se vytvořit poznámku: ' + (error.message || JSON.stringify(error)));
+          
     }
-
+const payload = { userid, name, text, important };
+console.log("Pokus o insert:", payload);
     const note = data[0];
     return new Note(
       note.id,
