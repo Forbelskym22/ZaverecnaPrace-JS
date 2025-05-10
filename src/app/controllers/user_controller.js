@@ -25,11 +25,11 @@ export default class UserController {
     login = async (req,res) => {
         try{
             const { username, password} = req.body; 
-            login = await this.service.login(username,password);
+            let login = await this.service.login(username,password);
             if(login){
                 req.session.username = username
             }
-            res.redirect('/user/profile');
+            res.render('/user/profile', { notes: null || [] });
         }
         catch(error){
             res.render('user/register',  { errorMessage: error });
