@@ -26,6 +26,17 @@ export default class UserController {
         }
     }
     
+    delete = async (req,res) =>{
+        const { id } = req.params;
+        try{
+            await this.noteService.removeNote(id);
+            res.redirect('/user/profile');
+        }
+        catch(error){
+            res.redirect('/user/profile', {errorMessage: error.message});
+        }
+    }
+
 }
 
 

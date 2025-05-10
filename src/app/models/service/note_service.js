@@ -17,6 +17,7 @@ export class NoteService {
         let notes = await this.repo.getNotesByUserId(userid);
     
         const formattedNotes = notes.map(note => ({
+            id: note.id,
             name: note.name,
             text: note.text,
             important: note.important,
@@ -31,6 +32,10 @@ export class NoteService {
         formattedNotes.sort((a, b) => b.important - a.important);
     
         return formattedNotes;
+    }
+
+    async removeNote(id){
+        return this.repo.removeNote(id);
     }
     
     

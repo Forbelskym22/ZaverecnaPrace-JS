@@ -20,6 +20,7 @@ export default function() {
     router.post('/create', controller.create);
     router.get('/new', controller.getNoteForm)
 
+    router.post('/delete/:id', controller.delete);
     
 
     return router;
