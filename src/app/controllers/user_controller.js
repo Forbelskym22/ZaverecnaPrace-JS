@@ -29,7 +29,7 @@ export default class UserController {
             if(login){
                 req.session.username = username
             }
-            res.render('user/profile', { notes: null || [] });
+            res.redirect('profile')
         }
         catch(error){
             res.render('user/register',  { errorMessage: error });
@@ -41,7 +41,16 @@ export default class UserController {
     }
 
     getProfile = (req, res) => {
-        res.render("user/profile")
+        res.render("user/profile", { notes: null || [] });
+    }
+    logout = (req,res) => {
+        try{
+            req.session.username= null;
+            res.redirect("login");
+        }
+        catch(error){
+
+        }
     }
 }
 

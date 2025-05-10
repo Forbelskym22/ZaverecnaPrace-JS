@@ -47,6 +47,8 @@ export class UserService {
         async findUser(username){
           return await this.repo.findUserByUsername(username); 
         }
+
+        
 }
 
 

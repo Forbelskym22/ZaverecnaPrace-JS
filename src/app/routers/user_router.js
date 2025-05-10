@@ -13,13 +13,14 @@ export default function() {
     const controller = new UserController(userService);
     
     router.post('/register', controller.register);
-    router.get('/register', controller.getRegister)
+    router.get('/register', controller.getRegister);
 
     router.post('/login', controller.login);
-    router.get('/login', controller.getLogin)
+    router.get('/login', controller.getLogin);
 
     //router.post('/profile', controller.profile);
-    router.get('/profile', controller.getProfile)
+    router.get('/profile', controller.getProfile);
+    router.post('/logout', controller.logout);
 
     return router;
 }

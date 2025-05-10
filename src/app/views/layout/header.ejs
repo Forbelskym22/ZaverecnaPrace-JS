@@ -26,9 +26,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1 text-danger" href="/user/logout">
-              <i class="bi bi-box-arrow-right"></i> Odhlásit
-            </a>
+            <form action="/user/logout" method="POST" style="display: inline;">
+              <button type="submit" class="nav-link btn btn-link d-flex align-items-center gap-1 text-danger" style="padding: 0; border: none;">
+                <i class="bi bi-box-arrow-right"></i> Odhlásit
+              </button>
+            </form>
           </li>
         <% } else { %>
           <li class="nav-item">
