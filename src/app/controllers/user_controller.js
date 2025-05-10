@@ -2,15 +2,16 @@
 
 export default class UserController {
     
-    constructor(UserService) {
-        this.service = UserService;
+    constructor(UserService, NoteService) {
+        this.noteService = NoteService;
+        this.userService = UserService
     }
 
     register = async (req, res) => {
         try{
             const { username, password, confirmPassword } = req.body; 
             console.log(username, password, confirmPassword);
-            await this.service.createUser(username, password, confirmPassword);
+            await this.userService.createUser(username, password, confirmPassword);
         res.redirect('/user/login');
         }
         catch(error){
@@ -25,7 +26,7 @@ export default class UserController {
     login = async (req,res) => {
         try{
             const { username, password} = req.body; 
-            let login = await this.service.login(username,password);
+            let login = await this.userService.login(username,password);
             if(login){
                 req.session.username = username
             }
@@ -40,8 +41,18 @@ export default class UserController {
         res.render("user/login")
     }
 
-    getProfile = (req, res) => {
-        res.render("user/profile", { notes: null || [] });
+    getProfile = async (req, res) => {
+        try{
+            const username = req.session.username;
+            
+            const user = await this.userService.findUser(username);
+            let notes =  await this.noteService.getnotes(user.id);
+            console.log(notes);
+            res.render("user/profile", { notes: notes || [] });
+        }
+        catch(error){
+
+        }
     }
     logout = (req,res) => {
         try{

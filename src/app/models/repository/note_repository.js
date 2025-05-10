@@ -14,10 +14,10 @@ export class NoteRepository {
       .from('notes')
       .insert([
         {
-          userid: 11,
-          name: "s",
-          text: "s",
-          important: false
+          userid,
+          name,
+          text,
+          important
         }
       ])
       .select(); 
@@ -40,4 +40,27 @@ console.log("Pokus o insert:", payload);
       note.created_at 
     );
   }
+
+  async getNotesByUserId(userid) {
+    const { data, error } = await this.db
+      .from('notes')
+      .select('*')
+      .eq('userid', userid)
+      .order('created_at', { ascending: false }); // volitelné: seřazení podle data
+  
+    if (error) {
+      console.error("Chyba při načítání poznámek:", error);
+      throw new Error('Nepodařilo se načíst poznámky: ' + (error.message || JSON.stringify(error)));
+    }
+  
+    return data.map(note => new Note(
+      note.id,
+      note.userid,
+      note.name,
+      note.text,
+      note.important,
+      note.created_at
+    ));
+  }
+
 }

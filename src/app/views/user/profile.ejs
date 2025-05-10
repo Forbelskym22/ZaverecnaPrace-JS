@@ -31,16 +31,26 @@
     <div class="row">
       <% if (typeof notes !== 'undefined' && notes && notes.length > 0) { %>
         <% notes.forEach(note => { %>
-          <div class="col-md-6 mb-4">
+          <div class="col-12 mb-4">
             <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title"><%= note.title %></h5>
-                <p class="card-text"><%= note.content %></p>
-                <div class="d-flex justify-content-end">
-                  <a href="/notes/edit/<%= note.id %>" class="btn btn-sm btn-outline-secondary me-2">Upravit</a>
-                  <form action="/notes/delete/<%= note.id %>" method="POST" onsubmit="return confirm('Opravdu smazat?')">
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Smazat</button>
-                  </form>
+              <div class="card-body d-flex flex-column justify-content-between h-100">
+                <div>
+                  <h5 class="card-title">
+                    <%= note.name %>
+                    <% if (note.important) { %>
+                      <span class="badge bg-warning text-dark">Důležité</span>
+                    <% } %>
+                  </h5>
+                  <p class="card-text"><%= note.text %></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <p class="text-muted small mb-0"><i class="bi bi-clock"></i> <%= note.time %></p>
+                  <div class="d-flex gap-2">
+                    <a href="/notes/edit/<%= note.id %>" class="btn btn-sm btn-outline-secondary">Upravit</a>
+                    <form action="/notes/delete/<%= note.id %>" method="POST" onsubmit="return confirm('Opravdu smazat?')">
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Smazat</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,8 +59,10 @@
       <% } else { %>
         <p class="text-muted">Zatím žádné poznámky.</p>
       <% } %>
-      
     </div>
+  </div>
+    
+    
 
   </div>
 </body>
