@@ -8,7 +8,6 @@ export class NoteRepository {
   }
 
   async createNote(userid, name, text, important = false) {
-    const negr = { userid, name, text, important };
     const { data, error } = await this.db
       .from('notes')
       .insert([

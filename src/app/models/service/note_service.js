@@ -29,8 +29,13 @@ export class NoteService {
         }));
     
         
-        formattedNotes.sort((a, b) => b.important - a.important);
-    
+        formattedNotes.sort((a, b) => {
+            if (a.important !== b.important) {
+                return b.important - a.important;
+            }
+
+            return new Date(b.time) - new Date(a.time);
+        });    
         return formattedNotes;
     }
 

@@ -45,9 +45,9 @@
                     <form action="/notes/toggle-important/<%= note.id %>" method="POST">
                       <button type="submit" class="btn btn-sm p-0 border-0 bg-transparent">
                         <% if (note.important) { %>
-                          <span class="fs-5 text-warning">★</span>
+                          <span class="fs-2 text-warning">★</span>
                         <% } else { %>
-                          <span class="fs-5 text-secondary">☆</span>
+                          <span class="fs-2 text-secondary">☆</span>
                         <% } %>
                       </button>
                     </form>

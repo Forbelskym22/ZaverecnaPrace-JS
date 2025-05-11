@@ -11,7 +11,7 @@ export class UserService {
 
       async createUser(username, password, checkpassword) {
         if (password !== checkpassword) {
-            throw new Error("Passwords don't match.");
+            throw new Error("Hesla se neshodují.");
         }
         else if(!username || !password  || ! checkpassword){
             throw new Error('Missing required parameters: username, password, or display name.');
