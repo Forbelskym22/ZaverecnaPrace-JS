@@ -60,8 +60,26 @@ export default class UserController {
             res.redirect("login");
         }
         catch(error){
+            res.redirect("profile", {errorMessage: error.message});
+        }
+    }
+
+    delete = async (req,res) => {
+        try{
+            const username = req.session.username;
+
+            const user = await this.userService.findUser(username);
+            let userid = user.id;
+            const noteids = await this.noteService.getUserNotes(userid);
+            this.noteService.removeUserNotes(noteids);
+            res.redirect("/");
+        }
+        catch(error){
+            console.log("kurwa");
+            res.render("user/profile", {errorMessage: error.message});
 
         }
+
     }
 }
 

@@ -9,7 +9,6 @@ export class NoteRepository {
 
   async createNote(userid, name, text, important = false) {
     const negr = { userid, name, text, important };
-    console.log("Pokus o insert:", negr);
     const { data, error } = await this.db
       .from('notes')
       .insert([
@@ -29,7 +28,6 @@ export class NoteRepository {
           
     }
     const payload = { userid, name, text, important };
-    console.log("Pokus o insert:", payload);
         const note = data[0];
         return new Note(
         note.id,
@@ -77,7 +75,47 @@ export class NoteRepository {
 
         
 
-        console.log("Poznámka byla úspěšně smazána:", data);
         return data;
     }
+
+    async toggleImportant(id) {
+    const { data: existingNote, error: fetchError } = await this.db
+      .from('notes')
+      .select('important')
+      .eq('id', id)
+      .single();
+
+    if (fetchError) {
+      console.error("Chyba při načítání poznámky:", fetchError);
+      throw new Error('Nepodařilo se načíst poznámku.');
+    }
+
+    const newValue = !existingNote.important;
+
+    const { data, error } = await this.db
+      .from('notes')
+      .update({ important: newValue })
+      .eq('id', id)
+      .select();
+
+    if (error) {
+      console.error("Chyba při aktualizaci poznámky:", error);
+      throw new Error('Nepodařilo se aktualizovat poznámku.');
+    }
+
+    return data[0];
+  }
+
+  async getNoteIdsByUserId(userid) {
+  const { data, error } = await this.db
+    .from('notes')
+    .select('id')
+    .eq('userid', userid);
+
+  if (error) {
+    console.error("Chyba při načítání ID poznámek:", error);
+    throw new Error('Nepodařilo se načíst ID poznámek.');
+  }
+  return data.map(row => row.id);
+}
 }

@@ -21,6 +21,7 @@ export default function() {
     router.get('/new', controller.getNoteForm)
 
     router.post('/delete/:id', controller.delete);
+    router.post('/toggle-important/:id', controller.updateImportance)
     
 
     return router;

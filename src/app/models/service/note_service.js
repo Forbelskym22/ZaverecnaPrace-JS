@@ -38,7 +38,18 @@ export class NoteService {
         return this.repo.removeNote(id);
     }
     
-    
+    async updateImportance(id){
+        return this.repo.toggleImportant(id);
+    }
+
+    async getUserNotes(userid){
+        return this.repo.getNoteIdsByUserId(userid);
+    }
+    async removeUserNotes(notesidArray) {
+        for (const id of notesidArray) {
+            await this.repo.removeNote(id);
+        }
+    }
 
 }
 
