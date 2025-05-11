@@ -73,6 +73,7 @@ export default class UserController {
             this.noteService.removeUserNotes(noteids);
 
             this.userService.removeUser(userid);
+            req.session.username= null;
             res.redirect("/");
         }
         catch(error){
