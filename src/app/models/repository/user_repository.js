@@ -36,6 +36,17 @@ export class UserRepository {
       
         return data;
       }
+
+      async deleteUserById(id) {
+        const { error } = await this.db
+          .from('users')
+          .delete()
+          .eq('id', id);
+
+        if (error) {
+          throw new Error('Chyba při mazání uživatele: ' + error.message);
+        }
+      }
 }
 
 

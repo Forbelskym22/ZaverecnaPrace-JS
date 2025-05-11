@@ -27,5 +27,7 @@ export default function() {
     router.get('/profile', controller.getProfile);
     router.post('/logout', controller.logout);
 
+    router.post('/delete', controller.delete);
+
     return router;
 }

@@ -48,7 +48,9 @@ export class UserService {
           return await this.repo.findUserByUsername(username); 
         }
 
-        
+        async removeUser(id) {
+          await this.repo.deleteUserById(id);
+        }
 }
 
 

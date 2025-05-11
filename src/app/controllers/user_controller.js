@@ -10,7 +10,6 @@ export default class UserController {
     register = async (req, res) => {
         try{
             const { username, password, confirmPassword } = req.body; 
-            console.log(username, password, confirmPassword);
             await this.userService.createUser(username, password, confirmPassword);
         res.redirect('/user/login');
         }
@@ -33,7 +32,7 @@ export default class UserController {
             res.redirect('profile')
         }
         catch(error){
-            res.render('user/register',  { errorMessage: error });
+            res.render('user/login',  { errorMessage: error });
         }  
     }
 
@@ -72,10 +71,11 @@ export default class UserController {
             let userid = user.id;
             const noteids = await this.noteService.getUserNotes(userid);
             this.noteService.removeUserNotes(noteids);
+
+            this.userService.removeUser(userid);
             res.redirect("/");
         }
         catch(error){
-            console.log("kurwa");
             res.render("user/profile", {errorMessage: error.message});
 
         }
